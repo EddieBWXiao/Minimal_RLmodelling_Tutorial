@@ -22,8 +22,15 @@ function [loglik, pout]= RW1lr1beta_2arm(params, data)
 % get behavioural data
 choice  = data.choice; 
 outcome = data.outcome; 
-nt      = length(choice);
+nt      = length(outcome);
 nc      = 2; % number of choice options
+
+% for simulations
+if isempty(choice)
+    sim_mode = true;
+else
+    sim_mode = false;
+end
 
 % get params
 alpha   = params(1);% sensitivity to reward and punishment
@@ -36,14 +43,29 @@ PP      = nan(size(VV)); % evolution of choice prob over time
 
 v = v0; % initialise v
 for t = 1:nt
-    c   = choice(t);
-    r   = outcome(t);
     
     % compute likelihood of the observed choices given the params and the
     % probability of 'go'
     ev  = exp(beta*v); % expected value
     sev = sum(ev);
     p   = ev/sev; % probability each choice
+    
+    if sim_mode
+        %generate the choice
+        c = 2-binornd(1,p(1)); %p(1) since for ref option
+        if c == 1
+            %based on choice, get outcome
+            r = outcome(t);
+        elseif c == 2
+            r = 1-outcome(t);
+            %in sim_mode, outcome should be all of option 1
+        end
+        data.choice(t) = c;%store it back into data
+        data.outcome(t) = r;%store it back into data!!
+    else
+        c   = choice(t);
+        r   = outcome(t);
+    end
     
     % store value of V and choice probability
     VV(t,:) = v; % store value of V
@@ -56,7 +78,11 @@ for t = 1:nt
 end
 
 % comput the likelihood: sum of logs of p(observed choice) for all trials
-loglik = sum(log(PP(data.choice==1,1)))+sum(log(PP(data.choice==2,2)));
+if sim_mode
+    loglik = NaN;
+else
+    loglik = sum(log(PP(data.choice==1,1)))+sum(log(PP(data.choice==2,2)));
+end
 
 % output parameters
 pout = struct('VV',VV,'PP',PP, 'loglik',loglik,'params',params,'data',data);
