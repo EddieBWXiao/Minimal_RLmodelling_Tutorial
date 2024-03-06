@@ -46,8 +46,8 @@ for t = 1:nt
     
     % compute likelihood of the observed choices given the params and the
     % probability of 'go'
-    ev  = exp(beta*v); % expected value
-    sev = sum(ev);
+    ev  = exp(beta*v); % exp(inverse temp * expected value) for each option
+    sev = sum(ev); %the sum to divide over
     p   = ev/sev; % probability each choice
     
     if sim_mode
