@@ -9,6 +9,9 @@ RW1lr1beta_2arm.m is adapted from the tutorial written by Hanneke den Ouden
 
 -This function is the model specification; it can act both as the likelihood function, which it does in the original den Ouden tutorial, and as a function to simulate choices (which makes life easier, I hope).
 
+example_outcome_sequence_1.mat
+
+-This sequence, when used in simulate and fit, is the outcome one would have observed if they their choice was "1" throughout.
 
 
 # Purpose
