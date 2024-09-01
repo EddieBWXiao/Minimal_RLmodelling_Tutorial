@@ -11,7 +11,9 @@ RW1lr1beta_2arm.m is adapted from the tutorial written by Hanneke den Ouden
 
 example_outcome_sequence_1.mat
 
+-Contains the struct, "data"
 -This sequence, when used in simulate and fit, is the outcome one would have observed if they their choice was "1" throughout.
+-However, when the choice is specified, data.outcome becomes the feedback received for the given choice on the trial.
 
 
 # Purpose
