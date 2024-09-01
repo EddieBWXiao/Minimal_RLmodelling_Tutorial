@@ -16,3 +16,5 @@ RW1lr1beta_2arm.m is adapted from the tutorial written by Hanneke den Ouden
 -Existing RL tutorials can be "clunky": they can give more in-depth introductions to a topic, but it can be 1) overwhelming to think about all the steps of modelling at once without previous hands-on experiment, 2) impossible to adapt the code for one's own project.
 
 -This repository includes the bare minimum of code needed to get started. It should be a plug-and-play situation, as long as MATLAB has been installed.
+
+-May be suitable for people who would like to get a quick start with cognitive computational modelling, has quickly read the den Ouden tutorial / the Wilson & Collins (2019) paper, and would like to write MATLAB-based modelling scripts "from scatch" (i.e., without relying on the more powerful but also more complicated toolboxes such as the HGF / VBA ).
